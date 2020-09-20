@@ -1,0 +1,42 @@
+<article class="item">
+  {{ if .IsPage }}
+    {{ $u := .Permalink }}
+    {{ $dataPath := path.Join "content" .Dir "data.json" }}
+    {{ if fileExists $dataPath }}
+      {{ $d := getJSON $dataPath }}
+      {{ partial "user.html" $d }}
+
+      <div class="item-content">{{ .Content }}</div>
+
+      {{ if $d.target }}
+        {{ partial "repost.html" $d.target }}
+      {{ end }}
+
+      {{ if $d.linkInfo }}
+        {{ partial "link.html" $d.linkInfo }}
+      {{ end }}
+
+      {{ if gt (len $d.pictures) 0 }}
+        {{ partial "album.html" (dict "pics" $d.pictures "u" $u) }}
+      {{ end }}
+
+      {{ if $d.video }}
+        {{ $videoDataPath := path.Join "content" .Dir "video.json" }}
+        {{ if fileExists $videoDataPath }}
+          {{ $v := getJSON $videoDataPath }}
+          {{ partial "video.html" (dict "d" $d "video" $v) }}
+        {{ end }}
+      {{ end }}
+
+      {{ if $d.poi }}
+        <address class="item-addr">{{ $d.poi.name }}</address>
+      {{ end }}
+
+      {{ if $d.topic }}
+        <a href="/tags/{{ $d.topic.content }}" class="item-topic">
+          #{{ $d.topic.content }}
+        </a>
+      {{ end }}
+    {{ end }}
+  {{ end }}
+</article>

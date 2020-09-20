@@ -1,0 +1,9 @@
+{{ $u := .u }}
+<figure class="album album-{{ len .pics }}">
+  {{ range .pics }}
+    {{ $url := urls.Parse .picUrl }}
+    <img
+      loading="lazy"  class="album-item"
+      src="/s{{ $url.Path }}{{ with eq .format `heic` }}.jpg{{ end }}" />
+  {{ end }}
+</figure>

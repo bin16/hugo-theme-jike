@@ -1,0 +1,18 @@
+{{ define "title" }}
+<title>{{ .Title }} - {{ .Site.Title }}</title>
+{{ end }}
+
+{{ define "main" }}
+  <div class="container">
+    <h2>TOPIC</h2>
+    <hr>
+    <ul>
+      {{ range .Pages }}
+        <li>
+          <a href="{{ .Permalink }}">{{ .Title }}</a>
+          <code>({{ len .Pages }})</code>
+        </li>
+      {{ end }}
+    </ul>
+  </div>
+{{ end }}

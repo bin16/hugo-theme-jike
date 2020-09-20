@@ -1,0 +1,2 @@
+{{ $url := urls.Parse .video.url }}
+<video class="item-video" src="/s{{ $url.Path }}" controls></video>

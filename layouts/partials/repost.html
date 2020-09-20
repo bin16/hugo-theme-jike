@@ -1,0 +1,47 @@
+{{ if eq .status "NORMAL"  }}
+  <article class="item-repost">
+    <blockquote>
+      {{ partial "user.html" . }}
+
+      <div class="item-content">
+        <pre>{{ .content }}</pre>
+      </div>
+      {{ if gt (len .pictures) 0 }}
+      <figure class="album album-{{ len .pictures }}">
+        {{ range .pictures }}
+          <img
+            class="album-item"
+            loading="lazy"
+            src="{{ .middlePicUrl }}" alt="{{ .content }}">
+        {{ end }}
+      </figure>
+      {{ end }}
+      {{ if .linkInfo }}
+        {{ partial "link.html" .linkInfo }}
+      {{ end }}
+      {{ if .video }}
+        <div class="item-video p-3 text-center">
+          <small>
+            <a href="https://web.okjike.com/originalPost/{{ .id }}">[前往 web.okjike.com 查看视频]</a>
+          </small>
+        </div>
+      {{ end }}
+
+      {{ if .poi }}
+        <address class="item-addr">{{ .poi.name }}</address>
+      {{ end }}
+
+      {{ if .topic }}
+        <a href="/tags/{{ .topic.content }}" class="item-topic">
+          #{{ .topic.content }}
+        </a>
+      {{ end }}
+    </blockquote>
+  </article>
+{{ end }}
+
+{{ if eq .status "DELETED" }}
+  <blockquote>
+    <i class="text-muted">DELETED</i>
+  </blockquote>
+{{ end }}
