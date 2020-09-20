@@ -3,6 +3,6 @@
     <span>{{ .user.screenName }}</span>
   </a>
   <a class="item-user__date --small-text" href="/posts/{{ .id }}">
-    <time>2020-02-02</time>
+    <time datetime="{{ .createdAt }}">{{ dateFormat "2006-01-02" .createdAt }}</time>
   </a>
 </div>
