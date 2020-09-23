@@ -13,11 +13,22 @@
       {{ end }}
 
       {{ if $d.linkInfo }}
-        {{ partial "link.html" $d.linkInfo }}
+        {{ if $d.linkInfo.audio }}
+          {{ $mp3Path := printf "/s/%s%s" $d.id ".mp3" }}
+          {{ $mp3FilePath := path.Join "static" $mp3Path}}
+          AUDIO.mp3= {{ $mp3Path }}
+          {{ if fileExists $mp3FilePath }}
+            {{ partial "link-audio.html" (dict "linkInfo" $d.linkInfo "path" $mp3Path) }}
+          {{ end }}
+        {{ else }}
+          {{ partial "link.html" $d.linkInfo }}
+        {{ end }}
       {{ end }}
 
-      {{ if gt (len $d.pictures) 0 }}
-        {{ partial "album.html" (dict "pics" $d.pictures "u" $u) }}
+      {{ if $d.pictures }}
+        {{ if gt (len $d.pictures) 0 }}
+          {{ partial "album.html" (dict "pics" $d.pictures "u" $u) }}
+        {{ end }}
       {{ end }}
 
       {{ if $d.video }}

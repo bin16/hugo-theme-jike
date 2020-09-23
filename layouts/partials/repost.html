@@ -6,15 +6,17 @@
       <div class="item-content">
         <pre>{{ .content }}</pre>
       </div>
-      {{ if gt (len .pictures) 0 }}
-      <figure class="album album-{{ len .pictures }}">
-        {{ range .pictures }}
-          <img
-            class="album-item"
-            loading="lazy"
-            src="{{ .middlePicUrl }}" alt="{{ .content }}">
+      {{ if .pictures }}
+        {{ if gt (len .pictures) 0 }}
+        <figure class="album album-{{ len .pictures }}">
+          {{ range .pictures }}
+            <img
+              class="album-item"
+              loading="lazy"
+              src="{{ .middlePicUrl }}" alt="{{ .content }}">
+          {{ end }}
+        </figure>
         {{ end }}
-      </figure>
       {{ end }}
       {{ if .linkInfo }}
         {{ partial "link.html" .linkInfo }}
