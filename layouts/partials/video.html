@@ -1,2 +1,25 @@
+{{ $pName := printf "/s/%s.mp4" .d.id }}
+{{ $pFile := path.Join "static" $pName }}
+
 {{ $url := urls.Parse .video.url }}
-<video class="item-video" src="/s{{ $url.Path }}" controls></video>
+{{ $sName := path.Join "/s" $url.Path }}
+{{ $sFile := path.Join "static" $sName }}
+
+{{ if fileExists $pFile }}
+  <video class="item-video" 
+    poster="{{ .d.video.image.picUrl }}"
+    src="{{ $pName }}" preload="none" controls></video>
+{{ else if fileExists $sFile }}
+  <video class="item-video" 
+    poster="{{ .d.video.image.picUrl }}"
+    src="{{ $sName }}" preload="none" controls></video>
+{{ else }}
+  <a 
+    data-pname="{{ $pName }}"
+    data-pfile="{{ $pFile }}"
+    data-sname="{{ $sName }}"
+    data-sfile="{{ $sFile }}"
+    href="{{ .video.url }}" target="_blank">
+    DOWNLOAD VIDEO
+  </a>
+{{ end }}

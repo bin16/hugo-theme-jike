@@ -16,7 +16,7 @@
         {{ if $d.linkInfo.audio }}
           {{ $mp3Path := printf "/s/%s%s" $d.id ".mp3" }}
           {{ $mp3FilePath := path.Join "static" $mp3Path}}
-          AUDIO.mp3= {{ $mp3Path }}
+          <!-- AUDIO.mp3= {{ $mp3Path }} -->
           {{ if fileExists $mp3FilePath }}
             {{ partial "link-audio.html" (dict "linkInfo" $d.linkInfo "path" $mp3Path) }}
           {{ end }}

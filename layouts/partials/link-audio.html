@@ -1,12 +1,18 @@
 <div class="link-card-wrapper">
-  <a class="link-card" href="{{ .linkInfo.linkUrl }}">
+  <div class="link-card" href="{{ .linkInfo.linkUrl }}">
     <div class="link-card__image">
       <img class="link-card__image" loading="lazy" 
         src="{{ .linkInfo.pictureUrl }}" alt="{{ .linkInfo.title }}">
-      <audio src="{{ .path }}" preload="metadata" controls></audio>
+      <div 
+        onclick="togglePlay({{.path}})"
+        class="embed-music-player paused">
+        <audio 
+          id="{{ .path }}"
+          src="{{ .path }}" preload="metadata"></audio>
+      </div>
     </div>
-    <div class="link-card__title">
+    <a href="{{ .linkInfo.linkUrl }}" class="link-card__title">
       {{ .linkInfo.title }}
-    </div>
-  </a>
+    </a>
+  </div>
 </div>
