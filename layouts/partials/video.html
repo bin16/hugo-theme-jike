@@ -7,12 +7,10 @@
 
 {{ if fileExists $pFile }}
   <video class="item-video" 
-    poster="{{ .d.video.image.picUrl }}"
-    src="{{ $pName }}" preload="none" controls></video>
+    src="{{ $pName }}" preload="metadata" controls></video>
 {{ else if fileExists $sFile }}
   <video class="item-video" 
-    poster="{{ .d.video.image.picUrl }}"
-    src="{{ $sName }}" preload="none" controls></video>
+    src="{{ $sName }}" preload="metadata" controls></video>
 {{ else }}
   <a 
     data-pname="{{ $pName }}"
