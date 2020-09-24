@@ -17,8 +17,17 @@ img {
   background-color: #ffffff;
 }
 .item pre {
+  font-family: inherit;
+  font-size: 1rem;
   background: none;
   white-space: pre-wrap;
+  line-height: 1.5rem;
+}
+.item blockquote pre {
+  font-size: .85rem;
+}
+.item a {
+  text-decoration: none;
 }
 
 .album {
